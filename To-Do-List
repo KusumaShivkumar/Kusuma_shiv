@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        input {
+            padding: 8px;
+            width: 200px;
+        }
+
+        button {
+            padding: 8px;
+            cursor: pointer;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 8px 0;
+            padding: 8px;
+            border: 1px solid #ccc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+
+        .completed-button {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            cursor: pointer;
+        }
+		ul li.checked {
+				background: green;
+				color: white;
+				text-decoration: line-through;
+			}
+
+        .remove-button {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+
+<body>
+    <h1>To-Do List</h1>
+    <input type="text" id="taskInput" placeholder="Add a new task">
+    <button onclick="addTask()">Add</button>
+    <ul id="taskList"></ul>
+	
+<ul id="myUL">
+  <li>Hit the gym<button class="completed-button" onclick="completedtask(this.parentNode)">completed</button>
+                <button class="remove-button" onclick="removeTask(this.parentNode)">Remove</button></li>
+  <li>Pay bills<button class="completed-button" onclick="completedtask(this.parentNode)">completed</button>
+                <button class="remove-button" onclick="removeTask(this.parentNode)">Remove</button></li>
+  <li>Meet George<button class="completed-button" onclick="completedtask(this.parentNode)">completed</button>
+                <button class="remove-button" onclick="removeTask(this.parentNode)">Remove</button></li>
+  <li>Buy eggs<button class="completed-button" onclick="completedtask(this.parentNode)">completed</button>
+                <button class="remove-button" onclick="removeTask(this.parentNode)">Remove</button></li>
+  <li>Read a book<button class="completed-button" onclick="completedtask(this.parentNode)">completed</button>
+                <button class="remove-button" onclick="removeTask(this.parentNode)">Remove</button></li>
+  <li>Organize office<button class="completed-button" onclick="completedtask(this.parentNode)">completed</button>
+                <button class="remove-button" onclick="removeTask(this.parentNode)">Remove</button></li>
+</ul>
+    <script>
+        function addTask() {
+            var taskInput = document.getElementById("taskInput");
+            var taskList = document.getElementById("taskList");
+
+            if (taskInput.value.trim() === "") {
+                alert("Please enter a task");
+                return;
+            }
+
+            var li = document.createElement("li");
+            li.innerHTML = `
+                <span onclick="toggleComplete(this)">${taskInput.value}</span>
+				<button class="checked" onclick="completedtask(this.parentNode)">completed</button>
+                <button class="remove-button" onclick="removeTask(this.parentNode)">Remove</button>
+            `;
+            taskList.appendChild(li);
+            taskInput.value = "";
+        }
+
+        function completedtask(li) {
+            li.parentNode.classList.toggle("checked");
+        }
+
+        function removeTask(li) {
+            li.parentNode.removeChild(li);
+        }
+    </script>
+</body>
+</html>
